@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Movie Library - {% block title %}{% endblock %}</title>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+	
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap.min.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap-theme.min.css" %}" />
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "site.css" %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MovieLib</a>
+            </div>
+            <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="{% url 'movie_index' %}">Index</a></li>
+                <li><a href="{% url 'movie_create' %}">Create</a></li>-->
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">MovieLib options <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{% url 'movie_index' %}"><i class="fa fa-list fa-fw"></i> Movies List</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'movie_create' %}"><i class="fa fa-desktop fa-fw"></i> Create a new movie</a>
+                        </li>
+						<li>
+                            <a href="{% url 'movie_createMixin' %}"><i class="fa fa-desktop fa-fw"></i> Create a new movie using generic view and form models</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">
+                            include('polls.urls') samples:
+                        </li>
+                        <li>
+                            <a href="{% url 'movies_index' %}"><i class="fa fa-list fa-fw"></i> Movies List</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'movies_create' %}"><i class="fa fa-desktop fa-fw"></i> Create a new movie</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'movies_createMixin' %}"><i class="fa fa-desktop fa-fw"></i> Create a new movie using generic view and form models</a>
+                        </li>
+                    </ul>
+                </li>
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">Resources <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="http://startbootstrap.com/bootstrap-resources"><i class="fa fa-list fa-fw"></i> Bootstrap Resources List</a>
+                        </li>
+                        <li>
+                            <a href="http://startbootstrap.com/showcase"><i class="fa fa-desktop fa-fw"></i> Start Bootstrap Showcase</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="starter-template">
+
+        {% block content %}{% endblock %}
+        </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="{% static "jquery.min.js" %}"></script>
+	<script src="{% static "bootstrap.min.js" %}"></script>
+</body>
+</html>

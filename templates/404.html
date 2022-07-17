@@ -1,0 +1,27 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% block title %}Investigadores{% endblock %}
+
+{% block content %}
+
+</br></br>
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="hero-unit center">
+          <h1 align="center">Página no encontrada
+		  </br><small>
+			<font align="center" face="Tahoma" color="red">Error 404</font>
+		  </small>
+		  </h1>
+          <br />
+          <p>La página que usted esta solicitando no ha sido encontrada en el sistema. Utilice el botón <b>"Atrás"</b> de su navegador web para retornar a la página previa a esta.
+          <p><b>O puede también presionar el botón que aparece a continuación:</b></p>
+          <div align="center" ><a href="{% url 'sais_index' %}" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Regrear al Inicio</a></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}   

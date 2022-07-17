@@ -1,0 +1,102 @@
+{% extends "base_page.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Noticias" "New_create" %}
+{% endblock %}
+
+{% block title %}Mostrar Resultados{% endblock %}
+
+{% block content %}
+{% render_breadcrumbs %}
+<h1>Mostrar Resultados</h1>
+
+<div class="well">
+    <form class="form-horizontal container-fluid" method="post">
+      <div class="form-group">
+	  <label for="ejemplo_email_3" class="col-md-2 ">Año</label>
+	  <div class="col-md-4">
+	      <select class="form-control">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
+		  </select>
+	  </div>
+	  </div>
+	  <div class="form-group">
+	  	  <label for="ejemplo_email_3" class="col-md-2 ">Tipo</label>
+		  <div class="col-md-4">
+		  <label class="radio-inline">
+		    <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked>
+		    Individual
+		  </label>
+		  <label class="radio-inline">
+		    <input type="radio" name="opciones" id="opciones_2" value="opcion_2">
+		    Colectivo
+		  </label>
+		  </div>
+	  </div>
+	  <div class="form-group">
+	  	  <label for="ejemplo_email_3" class="col-md-2 ">Forma</label>
+		  <div class="col-md-4">
+		  <label class="radio-inline">
+		    <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked>
+		    Textual
+		  </label>
+		  <label class="radio-inline">
+		    <input type="radio" name="opciones" id="opciones_2" value="opcion_2">
+		    Tabla resumen
+		  </label>
+		  </div>
+	  </div>
+	  <div class="form-group">
+	  	<div class="col-lg-12">
+	  	<label>Nombre de la fuente
+		</label>
+		</div>
+		<div class="col-md-6">
+		<select multiple class="form-control">
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		</select>
+		<div style="float:right">
+	      <button type="submit" class="btn btn-default">Mostrar</button>
+	      <button type="submit" class="btn btn-default">Cancelar</button>
+	    </div>
+	    </div>
+	  </div>
+
+	  <div class="form-group">
+	  <div class="col-md-6">
+	  	<div style="float:right">
+	      <button type="submit" class="btn btn-default">Enviar</button>
+	      <button type="submit" class="btn btn-default">Guardar</button>
+	      <button type="submit" class="btn btn-default">Imprimir</button>
+	      <button type="submit" class="btn btn-default">Cancelar</button>
+	    </div>
+	  </div>
+	  </div>
+
+	  <div class="col-md-6"></div>
+        <!--<label><input type="radio" name="post-format" id="post-format-gallery">Show gallery</label>
+		<label><input type="radio" name="post-format" checked>Hide gallery</label>
+		<input type="checkbox" id="show" /> <label for="show">Show</label>
+		<p>Why use jQuery when you can use CSS?</p>
+		<aside>Checkbox is the correct UI element for this, BTW.</aside>
+		
+		Radio buttons:
+		<p>Show textboxes<input type="radio" name="radio1" value="Show" onClick="getResults()">Do nothing<input type="radio" name="radio1" value="Nothing"></p>
+		Textboxes:
+		<div class="text"><p>Textbox #1 <input type="text" class="textinput textInput form-control form-control span8" name="text1" id="text1" maxlength="30"></p></div>
+		<div class="text"><p>Textbox #2 <input type="text" class="textinput textInput form-control form-control span8" name="text2" id="text2" maxlength="30"></p></div>-->
+    </form>
+</div>   
+
+{% endblock %}   

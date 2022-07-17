@@ -1,0 +1,28 @@
+Setting Initial Values
+
+As an improvement to this form, let’s add an initial value for the subject field: "I love your site!" (A little power of suggestion can’t hurt.) To do this, we can use the initial argument when we create a Form instance:
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['subject'],
+                cd['message'],
+                cd.get('email', 'noreply@example.com'),
+                ['siteowner@example.com'],
+            )
+            return HttpResponseRedirect('/contact/thanks/')
+    else:
+        form = ContactForm(
+            initial={'subject': 'I love your site!'}
+        )
+    return render(request, 'contact_form.html', {'form': form})
+Now, the subject field will be displayed prepopulated with that kind statement.
+
+Note that there is a difference between passing initial data and passing data that binds the form. The biggest difference is that if you’re just passing initial data, then the form will be unbound, which means it won’t have any error messages.
+
+
+
+form_class = new Form(param)

@@ -1,0 +1,25 @@
+{% extends "base_page.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Proyectos I+D+i" "proyectoidi_index" %}
+    {% breadcrumb object.titulo "empleoestudiantes_edit" object.id %}
+{% endblock %}
+
+{% block title %}{{object_name}} Confirmar eliminación?{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+<h3>Está usted seguro de eliminar el proyecto "{{ object.titulo }}" ?</h3>
+<form action="" method="post">{% csrf_token %}
+<input type="submit" class="btn btn-primary" value="Si, deseo continuar"/>  
+<input type="button" class="btn btn-primary" value="No, cancelar ahora mismo" onclick="window.history.go(-1);"/>
+</form>
+
+{% endblock %}

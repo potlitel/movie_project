@@ -1,0 +1,48 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Calendario" "inicio" %}
+{% endblock %}
+
+{% block title %}Calendario{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+	<!-- fullcalendar-2.6.0 -->
+	<link href="{% static 'fullcalendar-2.6.0/fullcalendar.css' %}" rel="stylesheet">
+	<link href="{% static 'fullcalendar-2.6.0/fullcalendar.print.css' %}" rel="stylesheet">
+	<script src="{% static 'fullcalendar-2.6.0/lib/moment.min.js' %}"></script>
+	<script src="{% static 'fullcalendar-2.6.0/lib/jquery.min.js' %}"></script>
+	<script src="{% static 'fullcalendar-2.6.0/fullcalendar.min.js' %}"></script>
+	<script src="{% static 'fullcalendar-2.6.0/lang/es.js' %}"></script>
+	<!-- fullcalendar-2.6.0 -->
+
+	
+<div id='calendar'></div>
+
+<script>
+
+	$(document).ready(function() {
+		var currentLangCode = 'es';
+	
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: '2016-01-12',
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+		});
+		renderCalendar();
+	});
+
+</script>
+{% endblock %}   

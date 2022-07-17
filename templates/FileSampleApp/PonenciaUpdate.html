@@ -1,0 +1,102 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Ponencias en eventos" "ponencia_eventos_index" %}
+    {% breadcrumb ponenciaevento.titulo "ponencia_edit" ponenciaevento.id %}
+{% endblock %}
+
+{% block title %}Editar ponencia{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap-fileinput-master/css/fileinput.css" %}" />
+<script src="{% static "bootstrap-fileinput-master/js/fileinput.js" %}"></script>
+<script src="{% static "bootstrap-fileinput-master/js/fileinput_locale_es.js" %}"></script>
+<h1 align="left"><img id="pdf" src="{% static "img/Ponencia.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Editar Ponencia</h1>
+
+<!--{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+	{{ form|crispy }}
+	<button class="btn btn-primary" type="submit">Salvar cambios</button>
+</form>-->
+
+<div class="wells">
+    {% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+
+<script type="text/javascript">
+    $("#id_fichero").fileinput({
+        'showUpload':false,
+        'previewFileType':'any',
+            'allowedFileExtensions' : ['doc', 'docx','ppt','pptx','pdf'],
+      });
+   $(function() {
+
+   $("#id_pais").change(
+    function(){         
+               GetMunicipalities($(this).val());
+               }
+   );
+
+
+   $("#id_ciudad").change(
+    function(){         
+              }
+   );
+
+  var response_cache = {};
+
+
+  function GetMunicipalities(post_primary_key){
+        $.ajax({
+            url : "ciudades/", // the endpoint
+            type : "POST", // http method
+            data : { postpk : post_primary_key }, // data sent with the delete request
+            success : function(json_response) 
+            {
+                // hide the post
+              // $('#post-'+post_primary_key).hide(); // hide the post on success
+              // console.log(json_response);
+              $('#id_ciudad').empty()
+              for (var i in json_response) 
+              {
+                 //console.log(json_response[i].fields.nombre + json_response[i].pk);
+                $('#id_ciudad').append($('<option>', { 
+                                value: json_response[i].pk,
+                                text: json_response[i].fields.nombre 
+                        }));
+              }
+            },
+
+            error : function(xhr,errmsg,err) {
+                // Show an error
+                $('#results').html("<div class='alert-box alert radius' data-alert>"+
+                "Oops! We have encountered an error. <a href='#' class='close'>&times;</a></div>"); // add error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+  };
+
+
+  });
+</script>
+
+{% endblock %}

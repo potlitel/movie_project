@@ -1,0 +1,65 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+	{% breadcrumb "Premios" "premio_index" %}
+    {% breadcrumb "Crear Premio-Proyecto I+D+i" "cap_create" %}
+{% endblock %}
+
+{% block title %}Crear premio{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap-fileinput-master/css/fileinput.css" %}" />
+<script src="{% static "bootstrap-fileinput-master/js/fileinput.js" %}"></script>
+<script src="{% static "bootstrap-fileinput-master/js/fileinput_locale_es.js" %}"></script>
+<div id='info' align='left'><p></p></div>
+<h1 align="left"><img id="pdf" src="{% static "img/Premio.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Crear Premio-Proyecto I+D+i</h1>
+
+<div class="wells">
+	{% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>  
+
+<script type="text/javascript">
+   // with plugin options
+    	$("#id_fichero").fileinput({
+    		'showUpload':false,
+    		'previewFileType':'any',
+      	    'allowedFileExtensions' : ['doc', 'docx','ppt','pptx','pdf'],
+    	});
+   $(function() {		
+			$.ajax({
+					url : "searchProyectos/", // the endpoint
+					type : "POST", // http method
+					success : function(json_response) 
+					{
+					  if(json_response.length==0)
+					  {
+							$( "#info p" ).html("<div class='alert alert-info'><p>{{ user.username }}, no has registrado aun ningun Proyecto I+D+i para poder crear un Premio, para registrar un Proyecto I+D+i has click en este <a href='createProjIDi'>vinculo</a> o mediante el vinculo ubicado en el menu de ciencia y tecnica</div>");	
+							$('#submit-id-save').attr('disabled', 'disabled');
+					  }
+					},
+					error : function(xhr,errmsg,err) {
+						// Show an error
+					}
+			});
+    });
+</script> 
+
+{% endblock %}   

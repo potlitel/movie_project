@@ -1,0 +1,53 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+	{% breadcrumb "Proyectos I+D+i" "proyectoidi_index" %}
+    {% breadcrumb proyectoidi.titulo "proyectoidi_edit" proyectoidi.id %}
+{% endblock %}
+
+{% block title %}Editar Proyecto I+D+i{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap-fileinput-master/css/fileinput.css" %}" />
+<script src="{% static "bootstrap-fileinput-master/js/fileinput.js" %}"></script>
+<script src="{% static "bootstrap-fileinput-master/js/fileinput_locale_es.js" %}"></script>
+<h1 align="left"><img id="pdf" src="{% static "img/proyecto.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Editar Proyecto I+D+i</h1>
+
+<!--{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+	{{ form|crispy }}
+	<button class="btn btn-primary" type="submit">Salvar cambios</button>
+</form>-->
+
+<div class="wells">
+    {% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+
+<script type="text/javascript">
+  $("#id_fichero").fileinput({
+        'showUpload':false,
+        'previewFileType':'any',
+            'allowedFileExtensions' : ['doc', 'docx','ppt','pptx','pdf'],
+      });
+</script>
+
+{% endblock %}

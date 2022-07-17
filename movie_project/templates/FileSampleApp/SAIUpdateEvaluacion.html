@@ -1,0 +1,34 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Servicios Academico-Investigativos" "sais_index" %}
+    {% breadcrumb sai.area_solicitante "sai_edit" sai.id %}
+{% endblock %}
+
+{% block title %}Editar Servicio Acad&eacute;mico Investigativo{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<p class="Track" align="center"><img id="pdf" src="{% static 'img/SAI.png' %}" width="70" height="70" style="margin-bottom:-5px" /> Editar Servicio Acad&eacute;mico Investigativo</p>
+
+<div class="welsl">
+    {% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<!-- <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script> -->
+	<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+{% endblock %}

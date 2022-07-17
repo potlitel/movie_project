@@ -1,0 +1,12 @@
+{% extends "base_page.html" %}
+
+{% block title %}{{object_name}} Confirm delete?{% endblock %}
+
+{% block content %}
+
+<h3>Are you sure you want to delete "{{ object.title }}" movie?</h3>
+<form action="" method="post">{% csrf_token %}
+<input type="submit" class="btn btn-primary" value="Yes"/>  
+<input type="button" class="btn btn-primary" value="No" onclick="window.history.go(-1);"/>
+</form>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<style>
+        #page-wrap { width: 80%;  font: 14px/1.4 Georgia, serif; }
+
+#page-wrap p { border: 0; font: 14px Georgia, Serif; overflow: hidden; resize: none; }
+#page-wrap table { border-collapse: collapse; }
+#page-wrap table td,#page-wrap table th { border: 1px solid black; padding: 5px; }
+
+#header {  width: 40%; margin: 20px 0; background: #222; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; }
+
+#address { width: 250px; height: 150px; float: left; }
+#customer { overflow: hidden; }
+
+#logo { text-align: right; float: right; position: relative; margin-top: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }
+#header{ width:100%}
+
+#meta { margin-top: 1px; width: 300px; float: right; }
+#meta td { text-align: right;  }
+#meta td.meta-head { text-align: left; background: #eee; }
+#meta td textarea { width: 100%; height: 20px; text-align: right; }
+
+#items { clear: both; width: 100%; margin: 30px 0 0 0; border: 1px solid black; }
+#items th { background: #eee; }
+#items textarea { width: 80px; height: 50px; }
+#items tr.item-row td { border: 0; vertical-align: top; }
+#items td.description { width: 300px; }
+#items td.item-name { width: 175px; }
+#items td.description textarea, #items td.item-name textarea { width: 100%; }
+#items td.total-line { border-right: 0; text-align: right; }
+#items td.total-value { border-left: 0; padding: 10px; }
+#items td.total-value textarea { height: 20px; background: none; }
+#items td.balance { background: #eee; }
+#items td.blank { border: 0; }
+
+#terms { text-align: center; margin: 20px 0 0 0; }
+#terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; border-bottom: 1px solid black; padding: 0 0 8px 0; margin: 0 0 8px 0; }
+#terms textarea { width: 100%; text-align: center;}
+
+#page-wrap textarea:hover, #page-wrap textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }
+
+#image{
+    width:100px;
+	height:100px;
+}
+
+.TrackSmallTable {
+			  font-family: Track;
+			  text-transform: uppercase;
+			  font-size: 9pt;
+			  color: #333333;
+			}
+    </style>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Untitled</title>
+</head>
+<body>
+	
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+	
+	<p id="header">Listado de Publicaciones correspondientes a {{ user.first_name }} {{ user.last_name }}</p>
+	<!-- <div id="identity">
+            <p id="address">
+			Usuario : {{ user.ciudad }}<br>
+            Rol : {{ user.ciudad }}<br>
+            Fecha : {{ user.ciudad }}<br>
+            </p>
+            <div id="logo">
+              <img id="image" src="/static/img/ic_search_48px-128.png"/>
+			  <img src="{% static 'img/minus.png' %}"  width=16px height=16px></img>
+			  <img src="C:\minus.png"></img>
+            </div>
+    </div> -->
+	
+	<table id="items" class="TrackSmallTable">
+        <tr>
+            <th>Titulo</th>
+            <th>Pais</th>
+            <th>Ciudad</th>
+            <th>Editorial</th>
+        </tr>
+        {% for item in object %}
+        <tr class="item-row">
+            <td>{{ item.titulo }}</td>
+            <td>{{ item.pais }}</td>
+            <td>{{ item.ciudad }}</td>
+            <td>{{ item.editorial }}</td>
+        </tr>
+          {% endfor %}
+      </table>
+      <div id="terms">
+        <h5>SAISA</h5>
+        <p>"Sistema automatizado integral para el soporte administrativo del Centro de Innovacion y Calidad de la Educacion"</p>
+      </div>
+</body>
+</html>

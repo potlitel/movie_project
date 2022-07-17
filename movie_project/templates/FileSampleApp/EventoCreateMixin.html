@@ -1,0 +1,38 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+	{% breadcrumb "Eventos" "events_index" %}
+    {% breadcrumb "Crear evento" "cap_create" %}
+{% endblock %}
+
+{% block title %}Crear evento{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<h1 align="left"><img id="pdf" src="{% static "img/Evento.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Crear evento</h1>
+
+<div class="wells">
+	{% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" >
+        {% crispy form %}
+    </form>
+</div>   
+
+<script type="text/javascript">
+   $(function() {
+      //Utils.CmbCountry_selectionChange();
+  });
+</script>
+
+{% endblock %}   

@@ -1,0 +1,1 @@
+	<!-- Verificamos rol del usuario logueado -->    {% if user.perfil.rol_saisa_id != 1  %}		<script>			url = "{% url 'inicio' %}";			window.location = url;		</script>	{% endif %}	<!-- Verificamos rol del usuario logueado -->

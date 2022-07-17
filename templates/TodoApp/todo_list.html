@@ -1,0 +1,74 @@
+{% extends "base_page.html" %}
+
+{% block title %}Todo List{% endblock %}
+
+{% block content %}
+<div class="table-responsive"> 
+<table id="todoListItemsTable" class="table table-striped table-hover table-condensed">
+<thead>
+		<tr>
+			<th>Title</th>
+			<th>Priority</th>
+			<th>Due on</th>
+			<th>Action</th>
+		</tr>
+</thead>
+<tbody>
+  {% for todo in TodoList %}
+  <tr>
+	<td>{% if perms.todo.view_todo %}
+		<a href="{{todo.get_absolute_url}}">{{todo.title}}</a>
+		{% else %}
+			{{todo.title}}
+		{% endif %}
+	</td>
+	<td><ul id="{{todo.id}}"></ul>{{todo.priority}}</td>
+	<td>{{todo.due_on}}</td>
+	<td>{% if perms.todo.change_todo %}
+		<a href="{% url 'todo_update' todo.pk %}">Update</a>
+		{% endif %} | {% if perms.todo.delete_todo %}
+		<a href="{% url 'todo_delete' todo.pk %}">Delete</a>{% endif %}
+	</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+</div>
+<div style="float:right">
+            <button class="btn btn-primary" id="edit-todo" type="submit">Edit todo</button>
+            <button class="btn btn-primary" id="delete-todo" type="submit">Delete todo</button>
+</div>
+
+<script type="text/javascript">
+   $(function() {
+    var url;
+    var ItemId;
+    $("#edit-todo").attr('disabled','disabled');
+    $("#delete-todo").attr('disabled','disabled');
+
+    $('#todoListItemsTable tr').click(function() 
+    {
+        ItemId = $(this).find("ul").attr("id");
+        url = "{% url 'todo_update' 12345 %}".replace(/12345/, ItemId);
+        $("#edit-todo").attr('disabled',false);
+        $("#delete-todo").attr('disabled',false);
+    });
+
+    $('#edit-todo').click(function() 
+    {
+        //alert(url);
+        url = "{% url 'todo_update' 12345 %}".replace(/12345/, ItemId);
+        window.location = url;
+    });
+
+    $('#delete-todo').click(function() 
+    {
+        //alert(url);
+        url = "{% url 'todo_delete' 12345 %}".replace(/12345/, ItemId);
+        window.location = url;
+    });
+
+});
+</script>
+
+{% endblock %}

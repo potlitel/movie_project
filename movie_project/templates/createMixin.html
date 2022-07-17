@@ -1,0 +1,28 @@
+{% extends "base_page.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Create Movie{% endblock %}
+
+{% block content %}
+<h1>Create Movie</h1>
+<!--<form method="post" class="form">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+        {{ field.errors }}
+        {{ field.label_tag }}
+        {{ field }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Submit" />
+</form>-->
+
+	<div class="well" class="form-horizontal" data-validate="parsley">
+        {% crispy form %}
+    </div>
+
+<!--<form method="POST">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary" type="submit">Save movie</button>
+</form>-->
+{% endblock %}   

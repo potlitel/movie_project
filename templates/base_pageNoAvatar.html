@@ -1,0 +1,317 @@
+{% load staticfiles %}
+{% load avatar_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Movie Library - {% block title %}{% endblock %}</title>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+	
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.4-dist/css/bootstrap.min.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.4-dist/css/bootstrap-theme.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.4-dist/css/bootstrap-theme.min.css" %}" /> 
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "bootstrap-xtra-master/bootstrap-xtra-master/bootstrap.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-xtra-master/bootstrap-xtra-master/bootstrap.min.css" %}" /> -->
+    
+    <!-- Ejemplo Yoamel -->    
+    <!--<link rel="stylesheet" type="text/css" href="{% static "Thumbnail/component.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "Thumbnail/default.css" %}" />
+    <script src="{% static "Thumbnail/modernizr.custom.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "Thumbnail/M9A.css" %}" />-->
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "site.css" %}" rel="stylesheet">
+    <link href="{% static "SuperSimpleModalPopup.css" %}" rel="stylesheet">
+    <link href="{% static "social-buttons.css" %}" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="{% static "jquery.min.js" %}"></script>
+    <script src="{% static "jquery-1.9.1.js" %}"></script>
+    <!-- Popup -->
+    <script src="{% static "jquery-ui.min.js" %}"></script>
+    <link href="{% static "jquery-ui.css" %}" rel="stylesheet">    
+    <!-- Popup -->
+    <script src="{% static "bootstrap.min.js" %}"></script>
+
+    <script src="{% static "parsley.js" %}"></script>
+
+    <script src="{% static "datetimewidget/bootstrap-datetimepicker.es.js" %}"></script>
+
+    <script src="{% static "Phantomjs/lib/phantomjs.js" %}"></script>
+
+    <!--FooTable-2 -->    
+    <link href="{% static "FooTable-2/css/footable.core.css" %}" rel="stylesheet">
+    <link href="{% static "FooTable-2/css/footable-demos.css" %}" rel="stylesheet">
+    <link href="{% static "FooTable-2/css/paginationFooTable.css" %}" rel="stylesheet">
+    <link href="{% static "FooTable-2/css/arbitrary_toggle_markup.css" %}" rel="stylesheet">
+
+    <script src="{% static "FooTable-2/js/footable.js" %}"></script>
+    <script src="{% static "FooTable-2/js/footable.filter.js" %}"></script>
+    <script src="{% static "FooTable-2/js/footable.paginate.js" %}"></script>
+    <script src="{% static "FooTable-2/js/demos.js" %}"></script>
+
+    <!--Selector -->
+    <!-- Here ADMIN_MEDIA_PREFIX is path to django admin media -->
+    <script type="text/javascript" src="{% static "AdminSelector/core.js" %}"></script>
+    <script type="text/javascript" src="{% static "AdminSelector/actions.js" %}"></script>
+    <script type="text/javascript" src="{% static "AdminSelector/SelectBox.js" %}"></script>
+    <script type="text/javascript" src="{% static "AdminSelector/SelectFilter2.js" %}"></script>
+
+    <script src="{% static "Countries&Cities.js" %}"></script>
+    
+    <!-- Here ADMIN_MEDIA_PREFIX is path to django admin media 
+    <script type="text/javascript" src="{{ADMIN_MEDIA_PREFIX}}js/core.js"></script>
+    <script type="text/javascript" src="{{ADMIN_MEDIA_PREFIX}}js/getElementsBySelector.js"></script>
+    <script type="text/javascript" src="{{ADMIN_MEDIA_PREFIX}}js/actions.js"></script>
+    <script type="text/javascript" src="{{ADMIN_MEDIA_PREFIX}}js/SelectBox.js"></script>
+    <script type="text/javascript" src="{{ADMIN_MEDIA_PREFIX}}js/SelectFilter2.js"></script>
+    <script type="text/javascript" src="/{{MEDIA_URL}}/js/jsi18n.js"></script>-->
+    <script src="{% static "jsi18n.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "selector.css" %}" />
+
+    <!-- better-filter-widget -->
+    <script src="{% static "better-filter-widget.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "better-filter-widget.css" %}" />
+
+    <script type="text/javascript" src="{% static "django_password_strength/js/zxcvbn.js" %}"></script>
+    
+    <script type="text/javascript" src="{% static "django_password_strength/js/password_strength.js" %}"></script>
+    <!-- charsleft-widget 
+    <script src="{% static "charsleft-widget/js/charsleft.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "charsleft-widget/css/charsleft.css" %}" />    -->
+    
+	<style>		
+	.image.avatar {
+			border-radius: 100%;
+		}
+
+			.image.avatar:before {
+				display: none;
+			}
+
+			.image.avatar img {
+				border-radius: 10%;
+				width: 80px;
+				height: 80px;
+			}
+	</style>		
+	
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SAISA</a>
+            </div>
+            <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+				<li class="dropdown">
+                </li>
+				
+                <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">SAISA App <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">
+                            Modulo - Ciencia y Tecnica
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'pub_create' %}"><i class="fa fa-list fa-fw"></i> Publicacion</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'evn_create' %}"><i class="fa fa-list fa-fw"></i> Evento</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ponevn_create' %}"><i class="fa fa-list fa-fw"></i> Ponencia en Evento</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'projIDi_create' %}"><i class="fa fa-list fa-fw"></i> Proyecto IDi</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'cap_create' %}"><i class="fa fa-list fa-fw"></i> Capacitacion</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'pa_create' %}"><i class="fa fa-list fa-fw"></i> Patente</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ri_create' %}"><i class="fa fa-list fa-fw"></i> Resultado introducido</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'pre_create' %}"><i class="fa fa-list fa-fw"></i> Premio</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'Ep_create' %}"><i class="fa fa-list fa-fw"></i> Empleo de estudiantes</a>
+                        </li>
+						<li>
+                            <a href="{% url 'Obra_create' %}"><i class="fa fa-list fa-fw"></i> Obra Científica</a>
+                        </li>
+						<li>
+                            <a href="{% url 'SAI_create' %}"><i class="fa fa-list fa-fw"></i> SAI</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ranking' %}"><i class="fa fa-list fa-fw"></i> Mostrar Ranking</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'resultados' %}"><i class="fa fa-list fa-fw"></i> Mostrar Resultados</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'informe_ciencia_tecnica' %}"><i class="fa fa-list fa-fw"></i> Informe Ciencia Técnica</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">
+                            Modulo - Calendario
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'New_create' %}"><i class="fa fa-list fa-fw"></i> Noticia</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">
+                            Modulo - Presentación
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'investigadores' %}"><i class="fa fa-list fa-fw"></i> Investigadores</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">
+                            Prueba Yoamel
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'ModeloYoamel_create' %}"><i class="fa fa-list fa-fw"></i> ModeloYoamel</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'models_index' %}"><i class="fa fa-list fa-fw"></i> Models List</a>
+                        </li>
+                    </ul>
+                </li> -->
+				
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">Presentación <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{% url 'inicio' %}"><i class="fa fa-list fa-fw"></i> Inicio</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contactos' %}"><i class="fa fa-desktop fa-fw"></i> Contactos</a>
+                        </li>
+						<li>
+                            <a href="{% url 'investigadores' %}"><i class="fa fa-desktop fa-fw"></i> Investigadores</a>
+                        </li>
+                    </ul>
+                </li>
+				
+				<li><a href="{% url 'sais_index' %}" title="" class="img"> Servicios Académico Investigativos</a></li>
+				
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">Ciencia y Técnica <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{% url 'publications_index' %}"><i class="fa fa-list fa-fw"></i> Publicaciones</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'events_index' %}"><i class="fa fa-desktop fa-fw"></i> Eventos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ponencia_eventos_index' %}"><i class="fa fa-desktop fa-fw"></i> Ponencias en Eventos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'capacitacion_index' %}"><i class="fa fa-desktop fa-fw"></i> Registros de Capacitación</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'patente_index' %}"><i class="fa fa-desktop fa-fw"></i> Patentes o Registros</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'proyectoidi_index' %}"><i class="fa fa-desktop fa-fw"></i> Proyectos I+D+i</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'empleoestudiantes_index' %}"><i class="fa fa-desktop fa-fw"></i> Empleo de Estudiantes</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'resultadointroducido_index' %}"><i class="fa fa-desktop fa-fw"></i> Resultados Introducidos</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'premio_index' %}"><i class="fa fa-desktop fa-fw"></i> Premios</a>
+                        </li>
+						<li>
+                            <a href="{% url 'obras_index' %}"><i class="fa fa-desktop fa-fw"></i> Obras Científicas</a>
+                        </li>
+                    </ul>
+                </li>
+				
+				<li><a href="" title="" class="img"> Planificación</a></li>
+				
+				<li><a href="{% url 'noticia_index' %}" title="" class="img"> Noticias</a></li>
+				
+                <li class="dropdown">
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">User <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'logout' %}" title="" class="img"> Let me out</a></li>
+                        <li><a href="{% url 'password_change' %}" title="" class="img"> Cambiar mi clave de acceso</a></li>
+                        <li><a href="{% url 'settings' %}" title="" class="img"> Actualizar mi perfil</a></li>
+                    </ul>
+                    </li>
+                    {% else %}
+                        <li><a href="{% url 'loguin' %}" title="" class="img"> Let me in</a></li>
+                    {% endif %}
+                </li>
+            </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container">
+
+        {% load django_bootstrap_breadcrumbs %}
+
+        {% block breadcrumbs %}
+            {% clear_breadcrumbs %}
+            {% breadcrumb "Home" "/" %}
+        {% endblock %}
+
+        <div class="starter-template">
+				{% if user.is_authenticated %}
+				<p><strong>Bienvenido, {{ user.first_name }} {{ user.last_name }}.</strong></p> 
+				{% else %}
+			<div>    
+					<p>Bienvenido, usuario anónimo.</p>	
+			</div>
+			{% endif %}
+			
+			<section style="width:930px">
+			{% block content %}
+				request.session["fav_color"] = {{ user.username }} 
+				{% render_breadcrumbs %}
+			{% endblock %}
+			<section>
+        </div>
+
+    </div><!-- /.container -->
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<h1 align="center"><img id="pdf" src="{% static "img/empleoestudiantes.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Actualizar mi perfil</h1>
+
+    <form action="." method="post" accept-charset="utf-8" class="form-horizontal">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}	
+	    {% crispy form %}
+    </form>
+{% endblock %}

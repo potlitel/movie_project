@@ -1,0 +1,46 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Eventos" "events_index" %}
+    {% breadcrumb evento.nombre "event_edit" evento.id %}
+{% endblock %}
+
+{% block title %}Editar evento{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+
+	<!-- security section -->
+	{% include 'Security/RolTrabajador.html' %}
+	<!-- security section -->
+
+<h1 align="left"><img id="pdf" src="{% static "img/Evento.png" %}" width="70" height="70" style="margin-bottom:-5px" /> Editar Evento</h1>
+
+<!--{% load crispy_forms_tags %}
+<form method="POST">
+    {% csrf_token %}
+	{{ form|crispy }}
+	<button class="btn btn-primary" type="submit">Salvar cambios</button>
+</form>-->
+
+<div class="wells">
+    {% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+
+<script type="text/javascript">
+   $(function() {
+      Utils.CmbCountry_selectionChange();
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base_page.html" %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Usuarios" "users_index" %}
+	{% breadcrumb "Crear usuario" "register" %}
+{% endblock %}
+
+{% block title %}Crear usuario SAISA{% endblock %}
+
+{% block breadcrumbsZone %}
+{% render_breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+</br></br>
+	<!-- CSS required to notifIt -->
+	<script src="{% static 'notifIt/js/notifIt.js' %}" type="text/javascript"></script>
+    <link href="{% static 'notifIt/css/notifIt.css' %}" type="text/css" rel="stylesheet">
+	<!-- CSS required to notifIt -->
+		</br></br>
+        {% if registered %}
+        <!-- Rango says: <strong>thank you for registering!</strong> -->
+		<script type='text/javascript'>
+			Utils.notifyInfoWithNotifIt('Usuario creado satisfactoriamente');
+		</script>
+		<div style="padding-right:100px;padding-top:0px">    
+			<div style="float:left;padding-right:10px;">
+				<a href="{% url 'inicio' %}" class="btn btn-primary btn-lg">Ir al inicio.</a><br />
+			</div>	
+			<div>			
+				<a href="{% url 'register' %}" class="btn btn-primary btn-lg">Crear otro usuario.</a><br />
+			</div>	
+		</div>	
+        {% else %}
+		<h1 align="center"><img id="pdfImage" src="{% static 'img/avatar.png' %}" width="70" height="70" style="margin-bottom:-5px" /> Crear usuario SAISA</h1>
+		<!-- Rango says: <strong>register here!</strong><br /> -->
+
+        <form id="user_form" class="form-horizontal" method="post" action="{% url 'register' %}">
+            <!-- {% csrf_token %} -->
+			{% load crispy_forms_tags %}
+			{% crispy user_form %}
+            {% crispy profile_form %}
+			{{ user_form.media }}
+            <!-- Provide a button to click to submit the form. -->
+            <!-- <input type="submit" name="submit" value="Register" /> -->
+			<div class="form-actions">
+				<input type="submit" class="btn btn-primary" value="Crear usuario SAISA">
+					<a href="{% url 'inicio' %}" class="btn btn-primary">Cancelar</a>
+			</div>
+        </form> 
+        {% endif %}
+
+{% endblock %}

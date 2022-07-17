@@ -1,0 +1,24 @@
+{% extends "base_page.html" %}
+
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Capacitacion" "cap_create" %}
+{% endblock %}
+
+{% block title %}Crear nuevo ModeloYoamel{% endblock %}
+
+{% block content %}
+{% render_breadcrumbs %}
+<h1>Crear nuevo ModeloYoamel</h1>
+
+<div class="well">
+	{% load crispy_forms_tags %}
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>   
+
+{% endblock %}   

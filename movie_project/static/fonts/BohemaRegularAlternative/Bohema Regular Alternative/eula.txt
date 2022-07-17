@@ -1,0 +1,10 @@
+Bohema Regular Alternative is free for personal and commercial use.
+The font file/software may be modified to suit design of system requirements,
+But strictly for your own (personal or commercial) use. 
+You may not sell or distribute it.
+You may use this font for Font-Face embedding with the condition of having a link to www.onrepeat.net on your page and/or the following comment on your css file near the Font-Face embedding code: /* Bohema is a font by João Oliveira - www.onrepeat.net */
+This font may not be distributed or sold without my permission.
+This font is and remains (even when modified) the intellectual property of João Oliveira.
+
+João Oliveira
+www.onrepeat.net
